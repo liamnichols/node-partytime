@@ -1,0 +1,21 @@
+{
+  "name": "partytime",
+  "version": "0.0.1",
+  "description": "Geeky party integration",
+  "bin": {
+    "partytime": "app/index.js"
+  },
+  "scripts": {
+    "list-lights": "node scripts/list-lights.js",
+    "list-sonos": "node scripts/list-sonos.js",
+    "read-sequence": "node scripts/read-sequence.js",
+    "event-repl": "node scripts/event-repl.js"
+  },
+  "author": "Liam Nichols",
+  "license": "ISC",
+  "dependencies": {
+    "node-lifx": "0.6.0",
+    "request": "2.75.0",
+    "sonos-discovery": "https://github.com/jishi/node-sonos-discovery/archive/v1.0.0.tar.gz"
+  }
+}

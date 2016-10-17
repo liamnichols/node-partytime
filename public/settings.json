@@ -1,0 +1,54 @@
+{
+  "lightIdentifiers": {
+    "_hallway": "d073d501f40f",
+    "_lounge": "d073d5025b14",
+    "_liam": "d073d501ff28",
+    "_sonny": "d073d51255ca"
+  },
+  "sonosIdentifiers": {
+    "_kitchen": "RINCON_5CAAFD9771A201400",
+    "_lounge": "RINCON_B8E9379BFD1401400",
+    "_liam": "RINCON_5CAAFD9773C601400",
+    "_sonny": "RINCON_5CAAFD97735601400"
+  },
+
+  "light": {
+    "colors": {
+      "warm": { "hue": 0, "saturation": 0, "kelvin": 3000 },
+      "purple": { "hue": 313, "saturation": 78, "kelvin": 3000 },
+      "aqua": { "hue": 175, "saturation": 64, "kelvin": 3500 },
+      "orange": { "hue": 41, "saturation": 64, "kelvin": 3500 },
+      "white": { "hue": 0, "saturation": 0, "kelvin": 9000 },
+
+      "defaultOrange": { "hue": 37, "saturation": 32, "kelvin": 3500 },
+      "defaultGreen": { "hue": 142, "saturation": 56, "kelvin": 3500 }
+    },
+
+    "bulbs": [
+      {
+        "id": "d073d5025b14",
+        "label": "main",
+        "staticIp": "192.168.0.101"
+      },
+      {
+        "id": "d073d51255ca",
+        "label": "corner",
+        "staticIp": "192.168.0.104"
+      },
+      {
+        "id": "d073d501f40f",
+        "label": "hall",
+        "staticIp": "192.168.0.102"
+      }
+    ]
+  },
+
+  "fog": {
+    "ip": "192.168.0.100",
+    "macAddress": "b8:27:eb:25:4c:d5"
+  },
+
+  "sonos": {
+    "uuid": "RINCON_B8E9379BFD1401400"
+  }
+}

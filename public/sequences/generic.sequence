@@ -1,0 +1,65 @@
+###
+### Breathe Green
+### =============
+###
+### Starts off with a really slow subtle green breathe effect. Increases
+###  in intensity and gets brighter until we get to a strobe effect where
+###  it all goes dark and smoke comes on.
+###
+
+# generic sequence is used without relation to a track, this sequence is then looped
+generic
+
+# The main light should remain orange but 40% brightness all the time
+light main state color:defaultOrange brightness:40 duration:0.5
+
+# Start off a breathe function that lasts 1 minute for the corner, breating between 40% and 60% brigtness over 6 seconds (x 10).
+light corner breathe color:defaultGreen brightness:60 period:6 cycles:10
+wait 60.0
+
+# Once that's completed, increase the frequency over the next 60 seconds but less brightness
+light corner breathe color:defaultGreen brightness:55 period:3 cycles:20
+wait 60.0
+
+# Again, increase the intensity but also half the time
+light corner breathe color:defaultGreen brightness:50 period:1.5 cycles:20
+wait 30.0
+
+# Again, increase the intensity but keep it at 30 seconds
+light corner breathe color:defaultGreen brightness:45 period:0.75 cycles:40
+wait 30.0
+
+# Again, increase the intensity but keep it at 30 seconds
+light corner breathe color:defaultGreen brightness:43 period:0.375 cycles:40
+wait 15.0
+
+# and one more time
+light corner breathe color:defaultGreen brightness:43 period:0.1825 cycles:20
+wait 3.65
+
+# start getting more intense
+light corner breathe color:defaultGreen brightness:46 period:0.1825 cycles:20
+wait 3.65
+
+# ramp up the brightness a bit more
+light corner breathe color:defaultGreen brightness:50 period:0.1825 cycles:20
+wait 3.65
+
+# and again but also get a bit quicker
+light corner breathe color:defaultGreen brightness:53 period:0.12 cycles:20
+wait 2.4
+
+# so quick we pretty much pulse with some more light
+light corner breathe color:defaultGreen brightness:55 period:0.1 cycles:20
+wait 2
+
+# and dim down and blow some fog for 5 seconds
+light corner state color:defaultGreen brightness:0 duration:0.2
+light main state color:defaultOrange brightness:10 duration:0.2
+fog on duration:5.0
+wait 5.0
+
+# turn the light back up to 40% and loop round
+light corner state color:defaultGreen brightness:40 duration:3
+light main state color:defaultOrange brightness:40 duration:3
+loop 3.0

@@ -1,0 +1,28 @@
+# a track sequence maps to a song
+track title:"Closer (feat. Halsey)" artist:"The Chainsmokers"
+
+# Generic Sequence to start with
+################################################################################
+wait 2.0
+light main state color:defaultOrange brightness:40 duration:0.5
+light corner state color:defaultOrange brightness:0 duration:0.5
+wait 1.0
+light corner state color:defaultOrange brightness:80 duration:1.0
+wait 1.1
+light corner pulse color:defaultGreen brightness:80 period:2.0 cycles:65.0
+################################################################################
+
+# 2.12 fade the corner out completley
+at 132.0
+light corner state color:defaultOrange brightness:0 duration:1.0
+
+# 1 second later, bring the full white in
+wait 1
+light corner state color:white brightness:0
+light corner state color:white brightness:100 duration:2
+light main state color:white brightness:40 duration:2
+
+# 2.33, start pulsing
+at 153.0
+# fog on duration:10
+light corner breathe color:white brightness:40 period:0.5 cycles:42

@@ -1,0 +1,21 @@
+# default sequence is just a state config, no need for looping parameters
+default
+
+# shut everything off
+fog off
+light corner off duration:0.5
+light main off duration:0.5
+light hall off duration:0.5
+
+# wait 0.6 seconds before we switch the light back on
+wait 0.6
+
+# update the states while the lights are off
+light main state color:defaultOrange brightness:70
+light corner state color:defaultGreen brightness:40
+light hall state color:defaultGreen brightness:70
+
+# turn them back on with an animation
+light main on duration:3.0
+light corner on duration:3.0
+light hall on duration:3.0
