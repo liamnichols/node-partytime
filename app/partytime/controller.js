@@ -113,19 +113,30 @@ Controller.prototype.loadSequence = function(sequence, _startTime) {
   var startTime = _startTime || 0.0
 
   // check if the sequence hashes are the same. Don't load it as it's already loaded
-  if (_this.currentSequence && _this.currentSequence.hash === sequence.hash && sequence.type !== 'track') {
+  if (_this.currentSequence && _this.currentSequence.running && _this.currentSequence.hash === sequence.hash && sequence.type !== 'track') {
     return
   }
 
   console.log("[Controller] Loading Sequence (" + sequence.type + " @ " + startTime + "ms)")
 
+  // a handler for when the sequence finishes (on it's own)
+  function finishHandler(s) {
+
+    // load another sequence automatically again
+    if (s.type === 'generic') {
+      _this.loadSequence(_this.sequences.generics.random())
+    }
+  }
+
   // stop the current sequence
   if (_this.currentSequence) {
     _this.currentSequence.stop()
+    _this.currentSequence.removeListener('finished', finishHandler)
   }
 
   // start the next one
   _this.currentSequence = sequence
+  _this.currentSequence.on('finished', finishHandler)
   _this.currentSequence.start(_this, startTime)
 }
 

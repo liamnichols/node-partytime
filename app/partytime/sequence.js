@@ -1,3 +1,5 @@
+const EventEmitter = require('events').EventEmitter
+const util = require('util')
 const events = require("./events")
 const crypto = require("crypto")
 const parser = require("./sequence-parser")
@@ -18,7 +20,7 @@ function Sequence(data, settings) {
   var eventGroups = [ ]
   var relativeTime = 0.0
   var currentEvents = []
-  var loop = false
+  var hold = false
 
   function groupCurrentEvents() {
 
@@ -61,10 +63,10 @@ function Sequence(data, settings) {
 
 
     // this is a timing split, we handle this a little different
-    if (eventType === 'wait' || eventType === 'at' || eventType === 'loop') {
+    if (eventType === 'wait' || eventType === 'at' || eventType === 'hold') {
 
-      // loops aren't supported on the default sequence
-      if (metadata.type === 'default' && eventType === 'loop') {
+      // holds aren't supported on the default sequence
+      if (metadata.type === 'default' && eventType === 'hold') {
         throw new Error("Sequence: error evaluating line " + lineNo + ". A timing specifier (" + eventType + ") has been specified in a sequence type where timings aren't supported")
       }
 
@@ -74,9 +76,9 @@ function Sequence(data, settings) {
         throw new Error("Sequence: error evaluating line " + lineNo + ". A timing specifier (" + eventType + ") has been specified without a valid duration (seconds)")
       }
 
-      // loop events shouldn't change any of the below, just capture the time
-      if (eventType === 'loop') {
-        loop = seconds
+      // hold events shouldn't change any of the below, just capture the time
+      if (eventType === 'hold') {
+        hold = seconds
         continue
       }
 
@@ -105,11 +107,13 @@ function Sequence(data, settings) {
   if (this.type === 'track') {
     this.trackInfo = metadata.params
   }
-  this.loop = loop
+  this.hold = hold
 
   // set the event groups
   this.eventGroups = eventGroups.sort(function(a, b) { return a.time - b.time })
 }
+
+util.inherits(Sequence, EventEmitter)
 
 function evaluateEvent(type, line, number, settings) {
 
@@ -211,18 +215,19 @@ Sequence.prototype.start = function(controller, _startTime) {
       return g.time * 1000 >= currentTime && g.time !== _this.lastGroupTime
     })[0]
 
-    // we might have to loop back round if we've run out of event groups
+    // we might have to hold before completing
     if (!eventGroup) {
 
-      // if we support looping, start again, otherwise stop
-      if (_this.loop) {
-        let t = setTimeout(function() {
-          _this.startTime = (new Date).getTime()
-          runNextGroup()
-        }, _this.loop * 1000)
-        _this.timers.push(t)
+      function didFinish() {
+        _this.stop() // cleanup
+        _this.emit('finished', _this) // notify
+      }
+
+      // hold until we can finish up
+      if (_this.hold) {
+        _this.timers.push(setTimeout(didFinish, _this.hold * 1000))
       } else {
-        _this.stop()
+        didFinish()
       }
       return
     }

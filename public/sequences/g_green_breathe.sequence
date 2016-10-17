@@ -7,7 +7,7 @@
 ###  it all goes dark and smoke comes on.
 ###
 
-# generic sequence is used without relation to a track, this sequence is then looped
+# generic sequence is used without relation to a track
 generic
 
 # The main light should remain orange but 40% brightness all the time
@@ -62,4 +62,4 @@ wait 5.0
 # turn the light back up to 40% and loop round
 light corner state color:defaultGreen brightness:40 duration:3
 light main state color:defaultOrange brightness:40 duration:3
-loop 3.0
+hold 3.0
