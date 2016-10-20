@@ -4,12 +4,13 @@ const events = require("./events")
 const crypto = require("crypto")
 const parser = require("./sequence-parser")
 
-function Sequence(data, settings) {
+function Sequence(data, settings, name) {
 
   this.hash = crypto.createHash('sha1').update(data).digest('hex')
   this.type = null
   this.trackInfo = null
   this.eventGroups = null
+  this.name = name || "untitled"
 
   // make sure we have the data
   if (typeof data !== 'string') {

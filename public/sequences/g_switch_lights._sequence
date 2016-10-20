@@ -1,0 +1,55 @@
+###
+### Switch Lights
+### =============
+###
+### Switching the two lights between two different states on repeat
+###
+
+# generic sequence is used without relation to a track
+generic
+
+# The main light should start on orange @ 40% brightness
+light main state color:defaultOrange brightness:40
+light corner state color:defaultGreen brightness:40
+wait 1.0
+light main state color:defaultGreen brightness:40
+light corner state color:defaultOrange brightness:40
+wait 1.0
+light main state color:defaultOrange brightness:40
+light corner state color:defaultGreen brightness:40
+wait 1.0
+light main state color:defaultGreen brightness:40
+light corner state color:defaultOrange brightness:40
+wait 1.0
+light main state color:defaultOrange brightness:40
+light corner state color:defaultGreen brightness:40
+wait 1.0
+light main state color:defaultGreen brightness:40
+light corner state color:defaultOrange brightness:40
+wait 1.0
+light main state color:defaultOrange brightness:40
+light corner state color:defaultGreen brightness:40
+wait 1.0
+light main state color:defaultGreen brightness:40
+light corner state color:defaultOrange brightness:40
+wait 1.0
+light main state color:defaultOrange brightness:40
+light corner state color:defaultGreen brightness:40
+wait 1.0
+light main state color:defaultGreen brightness:40
+light corner state color:defaultOrange brightness:40
+wait 1.0
+light main state color:defaultOrange brightness:40
+light corner state color:defaultGreen brightness:40
+wait 1.0
+light main state color:defaultGreen brightness:40
+light corner state color:defaultOrange brightness:40
+wait 1.0
+light main state color:defaultOrange brightness:40
+light corner state color:defaultGreen brightness:40
+wait 1.0
+light main state color:defaultGreen brightness:40
+light corner state color:defaultOrange brightness:40
+wait 1.0
+
+hold 10.0

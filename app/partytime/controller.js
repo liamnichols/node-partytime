@@ -68,7 +68,7 @@ Controller.prototype.init = function() {
   }
 }
 
-Controller.prototype.getSequenceData = function(trackState) {
+Controller.prototype.getSequenceData = function(trackState, sequenceName) {
   let _this = this
 
   // return the default sequence if we don't have the track state
@@ -84,17 +84,32 @@ Controller.prototype.getSequenceData = function(trackState) {
   // return the track sequence if we have it, otherwise use the generic one
   if (sequence) {
     return { time: trackState.elapsedTimeNow(), sequence: sequence }
-  } else {
-    return { time: 0.0, sequence: _this.sequences.generics.random() }
+  } else if (typeof sequenceName === 'string') {
+
+    // try to find the sequence with the special name
+    var sequences = _this.sequences.generics.filter(function(s) { return s.name === sequenceName })
+    if (sequences[0]) {
+      return { time: 0.0, sequence: sequences[0] }
+    } else {
+      console.log("[Controller] Couldn't find sequence with name:", sequenceName)
+    }
   }
+  return { time: 0.0, sequence: _this.sequences.generics.random() }
 }
 
 // starts the party
 Controller.prototype.start = function() {
   let _this = this
 
+  // see if we have a generic name
+  let sequenceSpecifiedIndex = process.argv.indexOf("--sequence")
+  var sequenceName = undefined
+  if (sequenceSpecifiedIndex != -1 && typeof process.argv[sequenceSpecifiedIndex + 1] === 'string') {
+    sequenceName = process.argv[sequenceSpecifiedIndex + 1]
+  }
+
   // start the correct sequence
-  let data = _this.getSequenceData(_this.playerController.trackState)
+  let data = _this.getSequenceData(_this.playerController.trackState, sequenceName)
   _this.loadSequence(data.sequence, data.time)
   _this.hasStarted = true
 }
@@ -157,7 +172,7 @@ function readSequences(settings, inDir) {
     console.log("[Controller] Loading", util.inspect(file))
     let filePath = path.join(dir, file)
     let data = fs.readFileSync(filePath, 'utf8')
-    let sequence = new Sequence(data, settings)
+    let sequence = new Sequence(data, settings, file.replace(".sequence", ""))
 
     // keep hold of this sequence
     if (sequence.type === 'default') {
