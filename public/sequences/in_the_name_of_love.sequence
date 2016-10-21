@@ -1,0 +1,41 @@
+# a track sequence maps to a song
+track title:"Martin Garrix & Bebe Rexha - In The Name Of Love" artist:"Martin Garrix"
+
+# Use the standard generic sequence till we get to the bit we want
+# The main light should remain orange but 40% brightness all the time
+light main state color:defaultOrange brightness:40 duration:0.5
+
+# Start off a breathe function that lasts 1 minute for the corner, breating between 40% and 60% brigtness over 6 seconds (x 10).
+light corner breathe color:defaultGreen brightness:60 period:6 cycles:30
+wait 180.0
+
+# Time to dim down
+at 151.0
+light corner state color:defaultGreen brightness:0 duration:1.0
+light main state color:defaultOrange brightness:25 duration:0.75
+
+wait 4.0
+light corner state color:defaultGreen brightness:20 duration:0.5
+light main state color:defaultOrange brightness:40 duration:0.5
+
+wait 3.25
+light corner breathe color:defaultGreen brightness:40 period:0.25 cycles:15
+
+wait 3.75
+light corner breathe color:defaultGreen brightness:40 period:0.1 cycles:25
+
+wait 2.5
+light main state color:defaultOrange brightness:10 duration:0.25
+light corner state color:defaultGreen brightness:80 duration:0.25
+fog on duration:4
+
+wait 0.8
+light corner state color:defaultGreen brightness:20 duration:0.5
+light main state color:defaultOrange brightness:80 duration:0.5
+
+wait 2.7
+light main state color:defaultOrange brightness:40 duration:0.5
+light corner state color:defaultGreen brightness:40 duration:0.5
+
+wait 1.0
+light corner breathe color:defaultGreen brightness:60 period:6 cycles:30

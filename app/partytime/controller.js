@@ -94,6 +94,7 @@ Controller.prototype.getSequenceData = function(trackState, sequenceName) {
       console.log("[Controller] Couldn't find sequence with name:", sequenceName)
     }
   }
+  console.log("[Controller] Returning random sequence")
   return { time: 0.0, sequence: _this.sequences.generics.random() }
 }
 
@@ -102,6 +103,7 @@ Controller.prototype.start = function() {
   let _this = this
 
   // see if we have a generic name
+  console.log("[Controller] start")
   let sequenceSpecifiedIndex = process.argv.indexOf("--sequence")
   var sequenceName = undefined
   if (sequenceSpecifiedIndex != -1 && typeof process.argv[sequenceSpecifiedIndex + 1] === 'string') {
@@ -119,6 +121,7 @@ Controller.prototype.stop = function() {
   let _this = this
 
   // just go back to the default sequence
+  console.log("[Controller] stop")
   _this.loadSequence(_this.sequences.default)
   _this.hasStarted = false
 }
