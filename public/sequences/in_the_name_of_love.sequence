@@ -10,19 +10,19 @@ light corner breathe color:defaultGreen brightness:60 period:6 cycles:30
 wait 180.0
 
 # Time to dim down
-at 151.0
+at 150.0
 light corner state color:defaultGreen brightness:0 duration:1.0
 light main state color:defaultOrange brightness:25 duration:0.75
 
-wait 4.0
-light corner state color:defaultGreen brightness:20 duration:0.5
+wait 4.0 # 154
+light corner state color:defaultGreen brightness:40 duration:1.0
 light main state color:defaultOrange brightness:40 duration:0.5
 
-wait 3.25
-light corner breathe color:defaultGreen brightness:40 period:0.25 cycles:15
+wait 3.5
+light corner breathe color:defaultGreen brightness:20 period:0.25 cycles:15
 
 wait 3.75
-light corner breathe color:defaultGreen brightness:40 period:0.1 cycles:25
+light corner breathe color:defaultGreen brightness:20 period:0.1 cycles:25
 
 wait 2.5
 light main state color:defaultOrange brightness:10 duration:0.25
@@ -33,9 +33,28 @@ wait 0.8
 light corner state color:defaultGreen brightness:20 duration:0.5
 light main state color:defaultOrange brightness:80 duration:0.5
 
-wait 2.7
-light main state color:defaultOrange brightness:40 duration:0.5
-light corner state color:defaultGreen brightness:40 duration:0.5
-
 wait 1.0
-light corner breathe color:defaultGreen brightness:60 period:6 cycles:30
+light corner state color:defaultGreen brightness:20 duration:0.5
+light main state color:defaultOrange brightness:80 duration:0.5
+
+wait 0.5
+light corner state color:defaultGreen brightness:80 duration:0.5
+light main state color:defaultOrange brightness:20 duration:0.5
+
+
+
+
+wait 2.0
+light corner state color:defaultGreen brightness:20 duration:0.5
+light main state color:defaultOrange brightness:80 duration:0.5
+
+wait 1.2
+light corner state color:defaultGreen brightness:80 duration:0.5
+light main state color:defaultOrange brightness:20 duration:0.5
+
+wait 1.8
+light main state color:defaultOrange brightness:40 duration:0.75
+light corner state color:defaultGreen brightness:40 duration:0.75
+
+wait 1.0 # 167.5
+light corner breathe color:defaultGreen brightness:60 period:4 cycles:30

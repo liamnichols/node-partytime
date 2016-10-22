@@ -59,7 +59,7 @@ PlayerController.prototype.init = function() {
   function transportStateChanged(player) {
 
     if (!_this.quiet) {
-      console.log("[PlayerController] TS Changed:", player.playbackState, "title:", player.currentTrack.title, "artist:", player.currentTrack.artist)
+      console.log("[PlayerController] TS Changed:", player.playbackState, "title:", player.currentTrack.title, "artist:", player.currentTrack.artist, "time:", player.elapsedTime * 1000)
     }
 
     // if we're transitioning then keep quiet as we don't want to interrupt whatever sequence was on?
